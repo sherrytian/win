@@ -1,0 +1,72 @@
+@import "_reset.scss";
+$borderGray:1px solid #ddd;
+@mixin rounded($radius:5px){
+	-moz-border-radius:$radius;
+	-webkit-border-radius:$radius;
+	-ms-border-radius:$radius;
+	border-radius:$radius;
+}
+.btn{
+	display:inline-block;
+	margin:0 10px;
+	padding:5px 10px;
+	border:$borderGray;
+	cursor:pointer;
+	&.btn-cancel{
+		color:#333;
+		background-color:#fff;
+	}
+	&.btn-confirm{
+		color:#fff;
+		background-color:#029ae5;
+	}
+}
+.popup{
+	display:none;
+	padding-bottom:40px;
+	background-color:#fff;
+	border:1px solid #ddd;
+	@include rounded(3px);
+	>div{
+		box-sizing:border-box;
+	}
+	.popup-head{
+		position:relative;
+		height:30px;
+		padding:0 10px;
+		font-size:14px;
+		line-height:30px;
+		color:#fff;
+		background-color:#029ae5;
+		border-bottom:$borderGray;
+		cursor:pointer;
+		.btn-close{
+			position:absolute;
+			top:0;
+			right:10px;
+			cursor:pointer;
+		}
+	}
+	.popup-body{
+		min-height:40px;
+		padding:10px;
+	}
+	.popup-footer{
+		position:absolute;
+		bottom:0;
+		width:100%;
+		padding:5px 10px;
+		text-align:center;
+	}
+}
+.layer{
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	z-index:1000;
+	display:none;
+	background-color:#000;
+	opacity:0.5;
+}

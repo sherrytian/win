@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+	<title>弹出窗口</title>
+	<link rel="stylesheet" type="text/css" href="popup.min.css">
+	<script type="text/javascript">
+		var popup = 'hello';
+	</script>
+</head>
+<body>
+<div>
+	<button id="btn1">警告框</button>
+	<button id="btn2">确认框</button>
+	<button id="btn3">弹出窗口</button>
+	<button id="btn4">第二次弹出窗口</button>
+</div>
+<div class="popup" id="info">
+	<div class="popup-head">提示<span class="btn-close">&times;</span></div>
+	<div class="popup-body"><p>这是一个测试的弹框</p></div>
+	<div class="popup-footer">
+		<span class="btn btn-confirm">确定</span>
+		<span class="btn btn-cancel">取消</span>
+	</div>
+</div>
+<div class="popup" id="info2">
+	<div class="popup-head">提示<span class="btn-close">&times;</span></div>
+	<div class="popup-body"><p>这是一个测试的弹框</p></div>
+	<div class="popup-footer">
+		<span class="btn btn-confirm">确定</span>
+		<span class="btn btn-cancel">取消</span>
+	</div>
+</div>
+<div class="layer"></div>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="popup-1.js"></script>
+<script type="text/javascript">
+var infoHtml = '<p style="text-align:center;"><strong>这是一个</strong>测试的弹框</p><div>这里可以填很多内容哦！</div><div>这里可以填很多内容哦！</div><div>这里可以填很多内容哦！</div>';
+var winPopup = zgxcw.popup.win({
+		'elementId':'info',
+		'width':300,
+		'height':'auto',
+		'title':'这里是标题',
+		'content':infoHtml,
+		'model':'win',
+		'closeBtn':true,
+		'confirmFn':fn2,
+		'cancelFn':fn3
+	});
+function fn1(){
+	console.log('alert 确定');
+}
+function fn2(){
+	// console.log('confirm 确定');
+	alert('confirm 确定');
+	winPopup.hide();
+	zgxcw.popup.mask().hide();
+}
+function fn3(){
+	console.log('confirm 取消');
+}
+function fn4(){
+	console.log('win 确定');
+}
+function fn5(){
+	console.log('win 取消');
+}
+
+$('#btn1').click(function(){
+	zgxcw.popup.alert({
+		'elementId':'info1',
+		'width':300,
+		'height':'auto',
+		'title':'提示',
+		'content':'删除成功',
+		'model':'alert',
+		'confirmFn':fn1
+	});
+});
+$('#btn2').click(function(){
+	zgxcw.popup.confirm({
+		'elementId':'info1',
+		'width':300,
+		'height':'auto',
+		'title':'提示',
+		'content':'您确定要删除吗？',
+		'model':'confirm',
+		'confirmFn':fn2,
+		'cancelFn':fn3
+	});
+});
+$('#btn3').click(function(){
+	winPopup.show();
+	zgxcw.popup.mask().show();
+});
+$('#btn4').click(function(){
+	winPopup.show();
+	zgxcw.popup.mask().show();
+});
+
+
+</script>
+</body>
+</html>

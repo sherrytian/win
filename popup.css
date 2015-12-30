@@ -1,0 +1,100 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, span, i {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+fieldset,
+img {
+  border: 0 none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+i,
+em {
+  font-style: normal;
+}
+
+.btn {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.btn.btn-cancel {
+  color: #333;
+  background-color: #fff;
+}
+.btn.btn-confirm {
+  color: #fff;
+  background-color: #029ae5;
+}
+
+.popup {
+  display: none;
+  padding-bottom: 40px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+}
+.popup > div {
+  box-sizing: border-box;
+}
+.popup .popup-head {
+  position: relative;
+  height: 30px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 30px;
+  color: #fff;
+  background-color: #029ae5;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+.popup .popup-head .btn-close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+.popup .popup-body {
+  min-height: 40px;
+  padding: 10px;
+}
+.popup .popup-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.layer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+/*# sourceMappingURL=popup.css.map */
