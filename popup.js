@@ -2,7 +2,8 @@
  * @fileOverview: popup.js 多功能弹出框
  * @author: tianxiaoyun 
  * @contact: email misstian2008@163.com || 358926040
- * @version: 1.0
+ * @version: 1.2
+ * @date: 2015-12-28
  * @external: [jquery.js]
  */
 zgxcw = window.zgxcw || {};
@@ -19,8 +20,7 @@ zgxcw.popup = (function(){
         'closeBtn':false,//可选 需要关闭按钮时设置为true, 默认false
         'confirmFn':null,//确认函数
         'cancelFn':null//取消函数
-	};
-	
+	}
 	/**
 	 * [style 渲染样式]
 	 * @param  {[string]} id     [id name]
@@ -32,29 +32,6 @@ zgxcw.popup = (function(){
         var winW = (width == 'auto') ? 300 : width,
             winH = (height == 'auto') ? parseInt(winObj.outerHeight()) : height;
             winObj.css({'position':'fixed','top':'50%','left':'50%','z-index':'1001','width':winW,'height':winH,'margin-top':'-'+winH/2+'px','margin-left':'-'+winW/2+'px'});
-	}
-	/**
-	 * [displayShow 显示弹框]
-	 * @param  {[jq object]} $obj [弹框元素]
-	 */
-	function displayShow($obj,flag){
-		$obj.show();
-		if(flag){
-			mask().show();
-		}
-	}
-	/**
-	 * [displayNone 不显示弹框]
-	 * @param  {[jq object]} $obj [弹框元素]
-	 * @param  {[string]} type [弹框类型]
-	 */
-	function displayNone($obj,type){
-		if(type === 'win'){
-			$obj.hide();
-		}else{
-			$obj.remove();
-		}
-		mask().hide();
 	}
 	/**
 	 * [渲染组件]
@@ -82,16 +59,9 @@ zgxcw.popup = (function(){
 				$('body').append(html);
 		}
 		// 渲染样式
-		if(type === 'win'){
-			// 如果是win检测是否已经初始化过
-			if(!$('#'+opt.elementId).attr('data-win')){
-				style(opt.elementId,opt.width,opt.height);
-				bindEvent(opt.elementId,opt);
-			}
-		}else{
-			style(opt.elementId,opt.width,opt.height);
-			bindEvent(opt.elementId,opt);
-		}
+		style(opt.elementId,opt.width,opt.height);
+		// 绑定事件
+		bindEvent(opt.elementId,opt);
 		return $('#'+opt.elementId);
 	}
 	/**
@@ -107,19 +77,16 @@ zgxcw.popup = (function(){
 			if($.isFunction(opt.confirmFn)){
 				opt.confirmFn();
 			}
-			displayNone($('#'+id),opt.model);
 		});
 		cancelBtn.on('click',function(){
 			if($.isFunction(opt.cancelFn)){
 				opt.cancelFn();
 			}
-			displayNone($('#'+id),opt.model);
 		});
 		closeBtn.on('click',function(){
 			if($.isFunction(opt.cancelFn)){
 				opt.cancelFn();
 			}
-			displayNone($('#'+id),opt.model);
 		});
 		if(opt.drag){
 			drag($('#'+id),$('#'+id+' .popup-head'));
@@ -185,21 +152,20 @@ zgxcw.popup = (function(){
 		win:function(opt){
 			var options = $.extend({}, defaults, opt);
 			// 渲染组件
-			var $obj = renderUI(options,'win');
-			$obj.attr('data-win','win');
-			displayShow($obj,options.mask);
+			return renderUI(options,'win');
 		},
 		alert:function(opt){
 			var options = $.extend({}, defaults, opt);
 			// 渲染组件
-			var $obj = renderUI(options,'alert');
-			displayShow($obj,options.mask);
+			return renderUI(options,'alert');
 		},
 		confirm:function(opt){
 			var options = $.extend({}, defaults, opt);
 			// 渲染组件
-			var $obj = renderUI(options,'confirm');
-			displayShow($obj,options.mask);
+			return renderUI(options,'confirm');
+		},
+		mask:function(){
+			return mask();
 		}
 	}
 })();

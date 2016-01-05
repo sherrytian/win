@@ -33,7 +33,7 @@
 </div>
 <div class="layer"></div>
 <script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="popup-1.js"></script>
+<script type="text/javascript" src="popup.js"></script>
 <script type="text/javascript">
 var infoHtml = '<p style="text-align:center;"><strong>这是一个</strong>测试的弹框</p><div>这里可以填很多内容哦！</div><div>这里可以填很多内容哦！</div><div>这里可以填很多内容哦！</div>';
 var winPopup = zgxcw.popup.win({
@@ -52,42 +52,53 @@ function fn1(){
 }
 function fn2(){
 	// console.log('confirm 确定');
-	alert('confirm 确定');
+	alert('win 确定');
 	winPopup.hide();
 	zgxcw.popup.mask().hide();
 }
 function fn3(){
-	console.log('confirm 取消');
-}
-function fn4(){
-	console.log('win 确定');
-}
-function fn5(){
 	console.log('win 取消');
+	winPopup.hide();
+	zgxcw.popup.mask().hide();
 }
 
 $('#btn1').click(function(){
-	zgxcw.popup.alert({
-		'elementId':'info1',
-		'width':300,
-		'height':'auto',
-		'title':'提示',
-		'content':'删除成功',
-		'model':'alert',
-		'confirmFn':fn1
-	});
+	var popup1 = zgxcw.popup.alert({
+			'elementId':'info1',
+			'width':300,
+			'height':'auto',
+			'title':'提示',
+			'content':'删除成功',
+			'model':'alert',
+			'confirmFn':function(){
+				alert('成功');
+				popup1.remove();
+				zgxcw.popup.mask().hide();
+			}
+			
+		});
+		popup1.show();
+		zgxcw.popup.mask().show();
 });
 $('#btn2').click(function(){
-	zgxcw.popup.confirm({
-		'elementId':'info1',
-		'width':300,
-		'height':'auto',
-		'title':'提示',
-		'content':'您确定要删除吗？',
-		'model':'confirm',
-		'confirmFn':fn2,
-		'cancelFn':fn3
-	});
+	var popup2 = zgxcw.popup.confirm({
+			'elementId':'info1',
+			'width':300,
+			'height':'auto',
+			'title':'提示',
+			'content':'您确定要删除吗？',
+			'model':'confirm',
+			'confirmFn':function(){
+				popup2.remove();
+				zgxcw.popup.mask().hide();
+			},
+			'cancelFn':function(){
+				popup2.remove();
+				zgxcw.popup.mask().hide();
+			}
+		});
+	popup2.show();
+	zgxcw.popup.mask().show();
 });
 $('#btn3').click(function(){
 	winPopup.show();

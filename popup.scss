@@ -26,6 +26,7 @@ $borderGray:1px solid #ddd;
 	padding-bottom:40px;
 	background-color:#fff;
 	border:1px solid #ddd;
+	box-sizing:border-box;
 	@include rounded(3px);
 	>div{
 		box-sizing:border-box;
